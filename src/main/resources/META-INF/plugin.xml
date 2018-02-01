@@ -1,0 +1,64 @@
+<idea-plugin>
+    <id>io.github.intellij.dub</id>
+    <name>DUB</name>
+    <version>@version@</version>
+    <vendor url="https://intellij-dlanguage.github.io/">intellij-dlanguage.github.io</vendor>
+
+    <description><![CDATA[
+     <img src="https://avatars3.githubusercontent.com/u/565913?v=3&s=60" alt="" />
+     <p>Integrates with the <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> plugin to provide improved support for the <a href="https://code.dlang.org/">dub</a> package manager.</p>
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <b>v0.1.0</b><br/>
+        <ul>
+            <li>Dub Tool Window</li>
+            <li>Compatible with IntelliJ 2017.3 - 2018.1</li>
+            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.15.4 to be installed</li>
+        </ul>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+    <idea-version since-build="173" until-build="181.*"/>
+
+    <!-- depending on modules.lang enables the plugin to work in all products -->
+    <depends>com.intellij.modules.lang</depends>
+
+    <!--<depends>org.jetbrains.plugins.terminal</depends>-->
+
+    <depends config-file="dlanguage.xml">net.masterthought.dlanguage</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Tool Windows are the bits generally displayed on right hand side of Intellij (eg: Ant,Maven,Gradle)-->
+        <toolWindow id="DUB" anchor="right" icon="/icons/dub-ball.png"
+                    factoryClass="io.github.intellij.dub.toolwindow.DubToolWindow"
+                    conditionClass="io.github.intellij.dub.toolwindow.DubToolWindowCondition"/>
+
+        <!--<externalSystemManager id="DubManager" implementation="net.masterthought.dlanguage.dub.DubManager"/>-->
+        <!--<externalSystemConfigLocator implementation="io.github.intellij.dub.ConfigLocator"/>-->
+        <!--<externalProjectDataService implementation=""/>-->
+        <!--<externalSystemViewContributor implementation=""/>-->
+        <!--<externalProjectStructureCustomizer implementation=""/>-->
+        <!--<externalSystemNotificationExtension implementation=""/>-->
+        <!--<externalSystemTaskNotificationListener implementation=""/>-->
+        <!--<externalSystemExecutionConsoleManager implementation=""/>-->
+    </extensions>
+
+    <actions>
+        <!-- Actions for Dub -->
+        <action id="dub.build.action" class="io.github.intellij.dub.actions.DubBuildAction"
+                text="_Run Dub"
+                description="Run Dub using selected options"
+                icon="AllIcons.Actions.Execute">
+        </action>
+
+        <action id="dub.settings.action" class="io.github.intellij.dub.actions.ConfigureDToolsAction"
+                text="_Configure D Tools"
+                icon="AllIcons.General.ProjectSettings">
+        </action>
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij.spellchecker">
+    </extensions>
+</idea-plugin>

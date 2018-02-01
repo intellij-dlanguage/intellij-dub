@@ -1,0 +1,21 @@
+<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
+<idea-plugin>
+    <extensions defaultExtensionNs="org.jetbrains.plugins.terminal">
+        <!--<localTerminalCustomizer implementation=""/>-->
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!--<localTerminalCustomizer implementation=""/>-->
+        <!--<projectImportProvider implementation="io.github.intellij.dub.DubProjectImporter"/>-->
+    </extensions>
+
+    <extensions defaultExtensionNs="net.masterthought.dlanguage">
+        <!--<extension id="" order=""/>-->
+
+        <!--<configurationType implementation="net.masterthought.dlanguage.run.DLanguageRunDubConfigurationType"/>-->
+
+        <!--<projectImportProvider implementation="io.github.intellij.dub.DubProjectImporter"/>-->
+
+        <!--<projectImportBuilder implementation="net.masterthought.dlanguage.project.DubProjectImportBuilder"/>-->
+    </extensions>
+</idea-plugin>
