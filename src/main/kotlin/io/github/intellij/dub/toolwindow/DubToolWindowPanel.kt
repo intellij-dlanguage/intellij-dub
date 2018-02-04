@@ -26,12 +26,15 @@ import com.intellij.openapi.externalSystem.model.execution.ExternalTaskExecution
 import com.intellij.openapi.externalSystem.service.task.ui.ExternalSystemTasksTree
 import com.intellij.openapi.externalSystem.util.ExternalSystemUtil
 import com.intellij.openapi.externalSystem.view.*
+import com.intellij.openapi.module.Module
 import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.DumbAwareAction
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.roots.OrderEntry
+import com.intellij.openapi.roots.ui.configuration.ProjectSettingsService
 import com.intellij.openapi.roots.ui.configuration.artifacts.nodes.ArtifactRootNode
 import com.intellij.openapi.ui.SimpleToolWindowPanel
+import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ex.ToolWindowEx
 import com.intellij.packageDependencies.ui.LibraryNode
@@ -46,11 +49,14 @@ import com.intellij.ui.components.JBScrollPane
 import com.intellij.ui.treeStructure.SimpleNode
 import com.intellij.ui.treeStructure.Tree
 import com.intellij.util.IconUtil
+import io.github.intellij.dlanguage.DlangSdkType
 import io.github.intellij.dub.actions.ConfigureDToolsAction
 import io.github.intellij.dub.actions.DubBuildAction
 import io.github.intellij.dlanguage.actions.ProcessDLibs
 import io.github.intellij.dlanguage.icons.DlangIcons
+import io.github.intellij.dlanguage.messagebus.DubChangeNotifier
 import io.github.intellij.dlanguage.messagebus.ToolChangeListener
+import io.github.intellij.dlanguage.messagebus.Topics
 import io.github.intellij.dlanguage.module.DlangModuleType
 import io.github.intellij.dlanguage.project.DubConfigurationParser
 import io.github.intellij.dlanguage.project.DubPackage
@@ -75,6 +81,7 @@ import javax.swing.tree.DefaultTreeModel
 class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
     SimpleToolWindowPanel(true, true),
     ToolChangeListener,
+    DubChangeNotifier,
     Disposable {
 
     private val LOG: Logger = Logger.getInstance(DubToolWindowPanel::class.java)
@@ -86,14 +93,21 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
 
         createToolbarContent()
 
-//        with(project.messageBus.connect()) {
-//            subscribe()
-//        }
+        with(project.messageBus.connect()) {
+            subscribe(Topics.DUB_FILE_CHANGE, this@DubToolWindowPanel)
+        }
     }
 
     // fired from intellij-dlanguage plugin when tool settings changed
     override fun onToolSettingsChanged(settings: ToolSettings) {
-        LOG.info("tool settings changed")
+        createToolbarContent()
+    }
+
+    override fun onDubFileChange(project: Project, module: Module, dubFile: VirtualFile) {
+        createToolbarContent()
+    }
+
+    override fun onDubSelectionsFileChange(project: Project, module: Module, dubFile: VirtualFile) {
         createToolbarContent()
     }
 
@@ -114,7 +128,7 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
         }
 
         ToolKey.DUB_KEY.path?.let {
-            val dubConfig = DubConfigurationParser(project, it, true)
+            val dubConfig = DubConfigurationParser(project, it, false)
 
 //            val nd = SimpleNode()
             val dependenciesRootNode = DefaultMutableTreeNode("Dependencies")
@@ -189,7 +203,7 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
     fun createToolbarPanel(): JPanel {
         val group = DefaultActionGroup()
 
-        group.add(RefreshAction())
+        group.add(RefreshAction( {createToolbarContent()} ))
         //group.add(AddAction())
         group.addSeparator()
         group.add(DubBuildAction()) // <-- defined in XML and code
@@ -209,10 +223,16 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
 
     // -----
 
-    class RefreshAction : DumbAwareAction("Refresh", "", AllIcons.Actions.Refresh) {
-        override fun actionPerformed(e: AnActionEvent?) {
-            ProcessDLibs().actionPerformed(e!!)
-            // todo: need to refresh Tool Window some how
+    class RefreshAction(private val callback: (() -> Unit)? = null) :
+        DumbAwareAction("Refresh", "", AllIcons.Actions.Refresh) {
+        override fun actionPerformed(e: AnActionEvent) {
+            val project = e.project ?: return
+
+            val sdk = ProjectSettingsService.getInstance(project).chooseAndSetSdk() ?: return
+
+            ProcessDLibs().actionPerformed(e) // should this be ProcessDLibs().update(e)
+
+            this.callback?.invoke()
         }
     }
 
