@@ -50,6 +50,7 @@ import io.github.intellij.dub.actions.ConfigureDToolsAction
 import io.github.intellij.dub.actions.DubBuildAction
 import io.github.intellij.dlanguage.actions.ProcessDLibs
 import io.github.intellij.dlanguage.icons.DlangIcons
+import io.github.intellij.dlanguage.messagebus.ToolChangeListener
 import io.github.intellij.dlanguage.module.DlangModuleType
 import io.github.intellij.dlanguage.project.DubConfigurationParser
 import io.github.intellij.dlanguage.project.DubPackage
@@ -71,7 +72,10 @@ import javax.swing.tree.DefaultTreeModel
  */
 //class DubToolWindowPanel(project: Project, toolWindow: ToolWindowEx) : ExternalProjectsViewImpl(project, toolWindow, Dub.SYSTEM_ID) {}
 
-class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) : SimpleToolWindowPanel(true, true), SettingsChangeNotifier, Disposable {
+class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
+    SimpleToolWindowPanel(true, true),
+    ToolChangeListener,
+    Disposable {
 
     private val LOG: Logger = Logger.getInstance(DubToolWindowPanel::class.java)
 
@@ -87,9 +91,9 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) : Sim
 //        }
     }
 
-    // fired from intellij-dlanguage plugin when dub settings changed
-    override fun onSettingsChanged(settings: ToolSettings) {
-        LOG.info("dub settings changed")
+    // fired from intellij-dlanguage plugin when tool settings changed
+    override fun onToolSettingsChanged(settings: ToolSettings) {
+        LOG.info("tool settings changed")
         createToolbarContent()
     }
 
@@ -109,10 +113,8 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) : Sim
             root.add(dubModule)
         }
 
-        val dubPath: String? = ToolKey.DUB_KEY.getPath()
-
-        dubPath?.let {
-            val dubConfig = DubConfigurationParser(project, dubPath)
+        ToolKey.DUB_KEY.path?.let {
+            val dubConfig = DubConfigurationParser(project, it, true)
 
 //            val nd = SimpleNode()
             val dependenciesRootNode = DefaultMutableTreeNode("Dependencies")
