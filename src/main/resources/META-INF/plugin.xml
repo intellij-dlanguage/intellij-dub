@@ -10,11 +10,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
-        <b>v0.1.0</b><br/>
+        <b>v0.1.1</b><br/>
         <ul>
             <li>Dub Tool Window</li>
             <li>Compatible with IntelliJ 2017.3 - 2018.1</li>
-            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.15.4 to be installed</li>
+            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.16.* to be installed</li>
         </ul>
     ]]>
     </change-notes>
