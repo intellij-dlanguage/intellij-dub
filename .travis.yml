@@ -19,17 +19,18 @@ env:
 jobs:
   include:
     - stage: Build and Test
-      env: ORG_GRADLE_PROJECT_ideaVersion=181-SNAPSHOT
+      env: ORG_GRADLE_PROJECT_ideaVersion=181-EAP-SNAPSHOT
+    - env: ORG_GRADLE_PROJECT_ideaVersion=181.3263.15
     - env: ORG_GRADLE_PROJECT_ideaVersion=2017.3.4
     - env: ORG_GRADLE_PROJECT_ideaVersion=2017.3
-#    - stage: Deploy new Release
-#      script: skip
-#      env: ORG_GRADLE_PROJECT_ideaVersion=2017.3
-#      deploy:
-#        provider: script
-#        skip_cleanup: true
-#        script: ./gradlew publishPlugin
-#        on:
-#          branch: master
+    - stage: Deploy new Release
+      script: skip
+      env: ORG_GRADLE_PROJECT_ideaVersion=2017.3
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script: ./gradlew publishPlugin
+        on:
+          branch: master
   allow_failures:
-    - env: ORG_GRADLE_PROJECT_ideaVersion=181-SNAPSHOT
+    - env: ORG_GRADLE_PROJECT_ideaVersion=181-EAP-SNAPSHOT
