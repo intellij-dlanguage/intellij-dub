@@ -10,6 +10,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <b>v0.1.2</b><br/>
+        <ul>
+            <li>Compatible with IntelliJ 2017.3 - 2019.1</li>
+            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.16.2 to be installed</li>
+        </ul>
         <b>v0.1.1</b><br/>
         <ul>
             <li>Dub Tool Window</li>
@@ -20,7 +25,7 @@
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="181" until-build="181.*"/>
+    <idea-version since-build="181" until-build="191.*"/>
 
     <!-- depending on modules.lang enables the plugin to work in all products -->
     <depends>com.intellij.modules.lang</depends>
