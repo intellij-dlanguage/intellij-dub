@@ -12,7 +12,7 @@ import io.github.intellij.dlanguage.settings.DLanguageToolsConfigurable
  * @author Samael Bate (singingbush)
  * created on 01/04/2017.
  */
-class ConfigureDToolsAction : DubAction("Configure D Tools", null, AllIcons.General.ProjectSettings) {
+class ConfigureDToolsAction : DubAction("Configure D Tools", null, AllIcons.General.GearPlain) {
 
     private val LOG: Logger = Logger.getInstance(ConfigureDToolsAction::class.java)
 

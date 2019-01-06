@@ -183,11 +183,11 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
                 icon = DlangIcons.LIBRARY
                 append(userObject.value.name) //, SimpleTextAttributes.STYLE_BOLD)
             } else if (userObject is PackageDependenciesNode) {
-                icon = AllIcons.Modules.ModulesNode
+                icon = AllIcons.Nodes.ModuleGroup
                 append("Dependencies") //, SimpleTextAttributes.STYLE_BOLD)
             } else if (userObject is DubPackage) {
                 val dependency = userObject
-                icon = AllIcons.Modules.Library
+                icon = AllIcons.Nodes.PpLib
                 append("${dependency.name} ${dependency.version}",
                         SimpleTextAttributes(
                                 SimpleTextAttributes.STYLE_ITALIC,
@@ -203,7 +203,7 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
     fun createToolbarPanel(): JPanel {
         val group = DefaultActionGroup()
 
-        group.add(RefreshAction( {createToolbarContent()} ))
+        group.add(RefreshAction {createToolbarContent()})
         //group.add(AddAction())
         group.addSeparator()
         group.add(DubBuildAction()) // <-- defined in XML and code

@@ -7,7 +7,6 @@ import com.intellij.execution.runners.ExecutionEnvironment
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.diagnostic.Logger
-import com.intellij.openapi.extensions.Extensions
 import com.intellij.openapi.module.ModuleManager
 import io.github.intellij.dlanguage.run.DlangRunDubConfiguration
 import io.github.intellij.dlanguage.run.DlangRunDubConfigurationType
@@ -30,9 +29,9 @@ class DubBuildAction : DubAction("_Run Dub", "", AllIcons.Actions.Execute) {
             var runDubSettings = runManager.findConfigurationByName(configName)
 
             if (runDubSettings == null) {
-                val runDubConfigurationType = Extensions.findExtension(ConfigurationType.CONFIGURATION_TYPE_EP, DlangRunDubConfigurationType::class.java)
+                val runDubConfigurationType = ConfigurationType.CONFIGURATION_TYPE_EP.findExtensionOrFail(DlangRunDubConfigurationType::class.java)
                 val factory = runDubConfigurationType.configurationFactories[0]
-                runDubSettings = runManager.createRunConfiguration(configName, factory)
+                runDubSettings = runManager.createConfiguration(configName, factory)
 
                 val config = runDubSettings.configuration as DlangRunDubConfiguration
 
@@ -52,9 +51,9 @@ class DubBuildAction : DubAction("_Run Dub", "", AllIcons.Actions.Execute) {
             runManager.selectedConfiguration = runDubSettings
 
             // now actually start the process
-            val dubBuildRunner = Extensions.findExtension(DubBuildRunner.PROGRAM_RUNNER_EP, DubBuildRunner::class.java)
+            val dubBuildRunner = DubBuildRunner.PROGRAM_RUNNER_EP.findExtensionOrFail(DubBuildRunner::class.java)
             val env = ExecutionEnvironment(DefaultRunExecutor(), dubBuildRunner, runDubSettings, it)
-            dubBuildRunner.execute(env, { LOG.info("DubBuildRunner started") })
+            dubBuildRunner.execute(env) { LOG.info("DubBuildRunner started") }
         }
 
     }
