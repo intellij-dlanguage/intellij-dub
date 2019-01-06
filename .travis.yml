@@ -19,13 +19,13 @@ env:
 jobs:
   include:
     - stage: Build and Test
-      env: ORG_GRADLE_PROJECT_ideaVersion=LATEST-TRUNK-SNAPSHOT
-    - env: ORG_GRADLE_PROJECT_ideaVersion=2018.1.6
-    - env: ORG_GRADLE_PROJECT_ideaVersion=2018.1.1
+      env: ORG_GRADLE_PROJECT_ideaVersion=191-SNAPSHOT
+    - env: ORG_GRADLE_PROJECT_ideaVersion=2018.3.2
+    - env: ORG_GRADLE_PROJECT_ideaVersion=2018.3
     - stage: Deploy new Release
       if: branch = master
       script: skip
-      env: ORG_GRADLE_PROJECT_ideaVersion=2018.1
+      env: ORG_GRADLE_PROJECT_ideaVersion=2018.3
       deploy:
         provider: script
         skip_cleanup: true
@@ -33,4 +33,4 @@ jobs:
         on:
           branch: master
   allow_failures:
-    - env: ORG_GRADLE_PROJECT_ideaVersion=LATEST-TRUNK-SNAPSHOT
+    - env: ORG_GRADLE_PROJECT_ideaVersion=191-SNAPSHOT

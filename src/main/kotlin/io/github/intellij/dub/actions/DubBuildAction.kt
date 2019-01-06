@@ -21,8 +21,8 @@ class DubBuildAction : DubAction("_Run Dub", "", AllIcons.Actions.Execute) {
 
     private val LOG: Logger = Logger.getInstance(DubBuildAction::class.java)
 
-    override fun actionPerformed(e: AnActionEvent?) {
-        e?.project?.let {
+    override fun actionPerformed(e: AnActionEvent) {
+        e.project?.let {
             val runManager = RunManagerImpl.getInstanceImpl(it)
             val projectName = it.name
             val configName = "$projectName [dub run]"

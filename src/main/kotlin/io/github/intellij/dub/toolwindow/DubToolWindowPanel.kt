@@ -237,13 +237,13 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
     }
 
     class AddAction : DumbAwareAction("Add", "", IconUtil.getAddIcon()) {
-        override fun actionPerformed(e: AnActionEvent?) {
+        override fun actionPerformed(e: AnActionEvent) {
             TODO("add a dub.json file")
         }
     }
 
 //    class DubRunAction : ExternalSystemAction() {
-//        override fun actionPerformed(e: AnActionEvent?) {
+//        override fun actionPerformed(e: AnActionEvent) {
 //            e?.project?.let {
 //                val runManager = RunManagerImpl.getInstanceImpl(it)
 //                //val configName = "${e.project!!.name} [dub run]"
@@ -275,7 +275,7 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
     // AllIcons.Toolwindows.ToolWindowRun
     // this class has moved. see DubBuildAction
 //    class RunAction : DumbAwareAction("_Run Dub", "", AllIcons.Actions.Execute) {
-//        override fun actionPerformed(e: AnActionEvent?) {
+//        override fun actionPerformed(e: AnActionEvent) {
 //            e?.project?.let {
 //                val runManager = RunManagerImpl.getInstanceImpl(it)
 //                val configName = "${e.project!!.name} [dub run]"
@@ -300,11 +300,11 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
 
     // set the '--nodeps'or maybe '--skip-registry=all' flag on dub args
     class ToggleOffline : ToggleAction("Toggle Offline Mode", "Toggle offline mode for Dub builds", AllIcons.Nodes.ExceptionClass) {
-        override fun isSelected(e: AnActionEvent?): Boolean {
+        override fun isSelected(e: AnActionEvent): Boolean {
             return false // todo:
         }
 
-        override fun setSelected(e: AnActionEvent?, state: Boolean) {
+        override fun setSelected(e: AnActionEvent, state: Boolean) {
             // todo
         }
     }
