@@ -19,7 +19,7 @@ env:
 jobs:
   include:
     - stage: Build and Test
-      env: ORG_GRADLE_PROJECT_ideaVersion=191-SNAPSHOT
+      env: ORG_GRADLE_PROJECT_ideaVersion=2019.1
     - env: ORG_GRADLE_PROJECT_ideaVersion=2018.3.2
     - env: ORG_GRADLE_PROJECT_ideaVersion=2018.3
     - stage: Deploy new Release
@@ -32,5 +32,5 @@ jobs:
         script: ./gradlew publishPlugin
         on:
           branch: master
-  allow_failures:
-    - env: ORG_GRADLE_PROJECT_ideaVersion=191-SNAPSHOT
+#  allow_failures:
+#    - env: ORG_GRADLE_PROJECT_ideaVersion=EAP-SNAPSHOT

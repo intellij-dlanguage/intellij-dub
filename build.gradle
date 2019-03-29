@@ -10,7 +10,7 @@ buildscript {
 }
 
 plugins {
-    id 'org.jetbrains.intellij' version '0.4.1'
+    id 'org.jetbrains.intellij' version '0.4.5'
 }
 
 
@@ -91,7 +91,7 @@ allprojects {
     intellij {
         pluginName 'intellij-dub'
         version ideaVersion
-        plugins 'net.masterthought.dlanguage:1.18' //, 'terminal' // can specify built in Intellij plugins that our plugin relies on such as 'copyright', 'coverage', or 'yaml'
+        plugins 'net.masterthought.dlanguage:1.18.1' //, 'terminal' // can specify built in Intellij plugins that our plugin relies on such as 'copyright', 'coverage', or 'yaml'
 
         publishPlugin {
             username System.getenv('JETBRAINS_USERNAME')
