@@ -10,6 +10,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <b>v0.2.0</b><br/>
+        <ul>
+            <li>Compatible with IntelliJ 2019.*</li>
+        </ul>
         <b>v0.1.2</b><br/>
         <ul>
             <li>Compatible with IntelliJ 2018.3 - 2019.1</li>
@@ -25,10 +29,13 @@
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="183" until-build="191.*"/>
+    <idea-version since-build="191" until-build="191.*"/>
 
     <!-- depending on modules.lang enables the plugin to work in all products -->
     <depends>com.intellij.modules.lang</depends>
+
+    <!-- Both AppCode and CLion use cidr.lang -->
+    <depends optional="true">com.intellij.modules.cidr.lang</depends>
 
     <!--<depends>org.jetbrains.plugins.terminal</depends>-->
 
