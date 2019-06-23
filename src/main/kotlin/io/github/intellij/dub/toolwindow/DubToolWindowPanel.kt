@@ -1,55 +1,27 @@
 package io.github.intellij.dub.toolwindow
 
 import com.intellij.execution.RunnerAndConfigurationSettings
-import com.intellij.execution.configurations.ConfigurationType
-import com.intellij.execution.configurations.ModuleBasedConfiguration
-import com.intellij.execution.dashboard.actions.RunAction
-import com.intellij.execution.executors.DefaultRunExecutor
 import com.intellij.execution.impl.RunManagerImpl
 import com.intellij.icons.AllIcons
-import com.intellij.ide.projectView.TreeStructureProvider
 import com.intellij.ide.projectView.ViewSettings
-import com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode
-import com.intellij.ide.projectView.impl.nodes.ProjectViewModuleGroupNode
 import com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode
-import com.intellij.ide.util.treeView.AbstractTreeNode
-import com.intellij.ide.util.treeView.AbstractTreeStructureBase
-import com.intellij.ide.util.treeView.NodeDescriptor
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.actionSystem.*
-import com.intellij.openapi.components.ServiceManager
 import com.intellij.openapi.diagnostic.Logger
-import com.intellij.openapi.extensions.Extensions
-import com.intellij.openapi.externalSystem.action.ExternalSystemAction
-import com.intellij.openapi.externalSystem.model.execution.ExternalSystemTaskExecutionSettings
-import com.intellij.openapi.externalSystem.model.execution.ExternalTaskExecutionInfo
-import com.intellij.openapi.externalSystem.service.task.ui.ExternalSystemTasksTree
-import com.intellij.openapi.externalSystem.util.ExternalSystemUtil
-import com.intellij.openapi.externalSystem.view.*
 import com.intellij.openapi.module.Module
-import com.intellij.openapi.options.ShowSettingsUtil
 import com.intellij.openapi.project.DumbAwareAction
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.roots.OrderEntry
+import com.intellij.openapi.roots.ModuleRootManager
 import com.intellij.openapi.roots.ui.configuration.ProjectSettingsService
-import com.intellij.openapi.roots.ui.configuration.artifacts.nodes.ArtifactRootNode
 import com.intellij.openapi.ui.SimpleToolWindowPanel
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.wm.ToolWindow
-import com.intellij.openapi.wm.ex.ToolWindowEx
-import com.intellij.packageDependencies.ui.LibraryNode
 import com.intellij.packageDependencies.ui.PackageDependenciesNode
-import com.intellij.packageDependencies.ui.PackageNode
-import com.intellij.packageDependencies.ui.RootNode
 import com.intellij.ui.ColoredTreeCellRenderer
 import com.intellij.ui.ScrollPaneFactory
-import com.intellij.ui.SimpleColoredComponent
 import com.intellij.ui.SimpleTextAttributes
-import com.intellij.ui.components.JBScrollPane
-import com.intellij.ui.treeStructure.SimpleNode
 import com.intellij.ui.treeStructure.Tree
 import com.intellij.util.IconUtil
-import io.github.intellij.dlanguage.DlangSdkType
 import io.github.intellij.dub.actions.ConfigureDToolsAction
 import io.github.intellij.dub.actions.DubBuildAction
 import io.github.intellij.dlanguage.actions.ProcessDLibs
@@ -60,14 +32,13 @@ import io.github.intellij.dlanguage.messagebus.Topics
 import io.github.intellij.dlanguage.module.DlangModuleType
 import io.github.intellij.dlanguage.project.DubConfigurationParser
 import io.github.intellij.dlanguage.project.DubPackage
+import io.github.intellij.dlanguage.run.DlangRunDubConfiguration
 import io.github.intellij.dlanguage.settings.*
-import java.awt.BorderLayout
 import java.awt.Color
 import javax.swing.JPanel
 import javax.swing.JTree
 import javax.swing.tree.DefaultMutableTreeNode
 import javax.swing.tree.DefaultTreeModel
-
 
 
 /**
@@ -113,20 +84,49 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
 
     fun createToolbarContent() {
         val root = DefaultMutableTreeNode(project.name) // ProjectNode()
+//        val root = ProjectViewProjectNode(project, ViewSettings.DEFAULT)
 
         // then for every sub module would need to add:
         DlangModuleType.findModules(project).forEach {
             val dubModule = DefaultMutableTreeNode(it.name) // ModuleNode()
             dubModule.userObject = ProjectViewModuleNode(project, it, ViewSettings.DEFAULT)
 
-            //dubModule.add(DefaultMutableTreeNode("source set"))
-//            val dubTasks = DefaultMutableTreeNode("tasks") // should this be: ExternalSystemTasksTree
-//            dubTasks.userObject = TaskNode()
-//            dubModule.add(dubTasks)
+//            ModuleRootManager.getInstance(it)
+//                .dependencies
+//                .forEach { lib ->
+//                    val libNode = DefaultMutableTreeNode(lib.name)
+//                    libNode.userObject = lib
+//                    dubModule.add(libNode)
+//                }
+
+            ModuleRootManager.getInstance(it)
+                .orderEntries()
+                .forEach { lib ->
+                    val libNode = DefaultMutableTreeNode(lib.presentableName)
+                    libNode.userObject = lib
+                    //PackageViewProjectNode(project, ViewSettings.DEFAULT)
+                    dubModule.add(libNode)
+                    lib.isValid
+                }
 
             root.add(dubModule)
         }
 
+        // Find Run Configurations for DUB and show them in the Tool Window:
+        val dubTasks = DefaultMutableTreeNode("Run Configurations") // should this be: ExternalSystemTasksTree
+        //dubTasks.userObject = DefaultMutableTreeNode()
+
+        val runManager = RunManagerImpl.getInstanceImpl(project)
+
+        runManager
+            .findConfigurationByTypeAndName(DlangRunDubConfiguration::class.java.simpleName, "Run DUB")?.let {
+                //dubTasks.add(DefaultMutableTreeNode(it.name))
+                dubTasks.add(RunnerAndConfigurationSettingsNode(it)) // todo: work out how to right-click on this and run it
+            }
+
+        root.add(dubTasks)
+
+        // Finally list the project dependencies. todo: Show transient dependencies under the dependency that brought them in
         ToolKey.DUB_KEY.path?.let {
             val dubConfig = DubConfigurationParser(project, it, false)
 
@@ -146,9 +146,7 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
             root.add(dependenciesRootNode)
         }
 
-        val model = DefaultTreeModel(root)
-        val tree: Tree = Tree(model)
-
+        val tree: Tree = Tree(DefaultTreeModel(root))
         tree.cellRenderer = DubTreeRenderer()
 
         //add(JBScrollPane(tree), BorderLayout.CENTER)
@@ -174,28 +172,46 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
 //        }
 //    }
 
+    class RunnerAndConfigurationSettingsNode(val settings: RunnerAndConfigurationSettings) : DefaultMutableTreeNode(settings.name) {
+        init {
+            this.userObject = settings
+        }
+    }
+
     class DubTreeRenderer : ColoredTreeCellRenderer() {
         override fun customizeCellRenderer(tree: JTree, value: Any?, selected: Boolean, expanded: Boolean, leaf: Boolean, row: Int, hasFocus: Boolean) {
-            val node = value as DefaultMutableTreeNode
-            val userObject = node.userObject
+            if(value == null) {
+                return
+            }
 
-            if (userObject is ProjectViewModuleNode) {
-                icon = DlangIcons.LIBRARY
-                append(userObject.value.name) //, SimpleTextAttributes.STYLE_BOLD)
-            } else if (userObject is PackageDependenciesNode) {
-                icon = AllIcons.Nodes.ModuleGroup
-                append("Dependencies") //, SimpleTextAttributes.STYLE_BOLD)
-            } else if (userObject is DubPackage) {
-                val dependency = userObject
-                icon = AllIcons.Nodes.PpLib
-                append("${dependency.name} ${dependency.version}",
-                        SimpleTextAttributes(
-                                SimpleTextAttributes.STYLE_ITALIC,
-                                Color.GRAY
+            val node = value as DefaultMutableTreeNode
+
+            node.userObject?.let {
+                when (it) {
+                    is ProjectViewModuleNode -> {
+                        icon = DlangIcons.LIBRARY
+                        append(it.value.name) //, SimpleTextAttributes.STYLE_BOLD)
+                    }
+                    is RunnerAndConfigurationSettingsNode -> {
+                        icon = AllIcons.RunConfigurations.Application
+                        append(it.settings.name)
+                    }
+                    is PackageDependenciesNode -> {
+                        icon = AllIcons.Nodes.ModuleGroup
+                        append("Dependencies") //, SimpleTextAttributes.STYLE_BOLD)
+                    }
+                    is DubPackage -> {
+                        val dependency = it
+                        icon = AllIcons.Nodes.PpLib
+                        append("${dependency.name} ${dependency.version}",
+                                SimpleTextAttributes(
+                                    SimpleTextAttributes.STYLE_ITALIC,
+                                    Color.GRAY
+                                )
                         )
-                )
-            } else {
-                append(userObject.toString()) // the default
+                    }
+                    else -> append(it.toString())
+                }
             }
         }
     }
