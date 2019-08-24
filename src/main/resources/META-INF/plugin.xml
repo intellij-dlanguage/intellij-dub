@@ -12,7 +12,8 @@
     <change-notes><![CDATA[
         <b>v0.2.0</b><br/>
         <ul>
-            <li>Compatible with IntelliJ 2019.*</li>
+            <li>Compatible with IntelliJ 2019.1.*</li>
+            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.19 to be installed</li>
         </ul>
         <b>v0.1.2</b><br/>
         <ul>
