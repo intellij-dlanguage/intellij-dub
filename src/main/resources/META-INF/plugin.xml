@@ -10,6 +10,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <b>v0.3.0</b><br/>
+        <ul>
+            <li>Compatible with IntelliJ 2019.2.*</li>
+            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.20 to be installed</li>
+        </ul>
         <b>v0.2.0</b><br/>
         <ul>
             <li>Compatible with IntelliJ 2019.1.*</li>
@@ -30,7 +35,7 @@
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="191" until-build="191.*"/>
+    <idea-version since-build="192" until-build="192.*"/>
 
     <!-- depending on modules.lang enables the plugin to work in all products -->
     <depends>com.intellij.modules.lang</depends>

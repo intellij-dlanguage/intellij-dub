@@ -93,7 +93,7 @@ allprojects {
         pluginName 'intellij-dub'
         version ideaVersion
         updateSinceUntilBuild false
-        plugins 'net.masterthought.dlanguage:1.19' //, 'terminal' // can specify built in Intellij plugins that our plugin relies on such as 'copyright', 'coverage', or 'yaml'
+        plugins 'net.masterthought.dlanguage:1.20' //, 'terminal' // can specify built in Intellij plugins that our plugin relies on such as 'copyright', 'coverage', or 'yaml'
 
         runIde {
             jbrVersion null
