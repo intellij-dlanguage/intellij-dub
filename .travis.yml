@@ -19,8 +19,11 @@ env:
 jobs:
   include:
     - stage: Build and Test
-      env: ORG_GRADLE_PROJECT_ideaVersion=2019.2.1
+      env: ORG_GRADLE_PROJECT_ideaVersion=2019.2.3
+    - env: ORG_GRADLE_PROJECT_ideaVersion=2019.2.2
+    - env: ORG_GRADLE_PROJECT_ideaVersion=2019.2.1
     - env: ORG_GRADLE_PROJECT_ideaVersion=2019.2
+    - env: ORG_GRADLE_PROJECT_ideaVersion=EAP-SNAPSHOT
     - stage: Deploy new Release
       if: branch = master
       script: skip
@@ -31,5 +34,5 @@ jobs:
         script: ./gradlew publishPlugin
         on:
           branch: master
-#  allow_failures:
-#    - env: ORG_GRADLE_PROJECT_ideaVersion=EAP-SNAPSHOT
+  allow_failures:
+    - env: ORG_GRADLE_PROJECT_ideaVersion=EAP-SNAPSHOT
