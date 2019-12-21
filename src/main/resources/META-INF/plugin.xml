@@ -10,6 +10,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <b>v0.3.1</b><br/>
+        <ul>
+            <li>Compatible with IntelliJ 2019.3.*</li>
+            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.22 to be installed</li>
+        </ul>
         <b>v0.3.0</b><br/>
         <ul>
             <li>Compatible with IntelliJ 2019.2.*</li>
