@@ -19,18 +19,13 @@ env:
 jobs:
   include:
     - stage: Build and Test
-      env: ORG_GRADLE_PROJECT_ideaVersion=2019.3.1
+      env: ORG_GRADLE_PROJECT_ideaVersion=2019.3.2
     - env: ORG_GRADLE_PROJECT_ideaVersion=2019.3
-    - env: ORG_GRADLE_PROJECT_ideaVersion=2019.2.4
-    - env: ORG_GRADLE_PROJECT_ideaVersion=2019.2.3
-    - env: ORG_GRADLE_PROJECT_ideaVersion=2019.2.2
-    - env: ORG_GRADLE_PROJECT_ideaVersion=2019.2.1
-    - env: ORG_GRADLE_PROJECT_ideaVersion=2019.2
     - env: ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
     - stage: Deploy new Release
       if: branch = master
       script: skip
-      env: ORG_GRADLE_PROJECT_ideaVersion=2019.2
+      env: ORG_GRADLE_PROJECT_ideaVersion=2019.3
       deploy:
         provider: script
         skip_cleanup: true

@@ -82,7 +82,7 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
         createToolbarContent()
     }
 
-    fun createToolbarContent() {
+    private fun createToolbarContent() {
         val root = DefaultMutableTreeNode(project.name) // ProjectNode()
 //        val root = ProjectViewProjectNode(project, ViewSettings.DEFAULT)
 
@@ -216,10 +216,10 @@ class DubToolWindowPanel(val project: Project, val toolWindow: ToolWindow) :
         }
     }
 
-    fun createToolbarPanel(): JPanel {
+    private fun createToolbarPanel(): JPanel {
         val group = DefaultActionGroup()
 
-        group.add(RefreshAction {createToolbarContent()})
+        group.add(RefreshAction( {createToolbarContent()} ))
         //group.add(AddAction())
         group.addSeparator()
         group.add(DubBuildAction()) // <-- defined in XML and code

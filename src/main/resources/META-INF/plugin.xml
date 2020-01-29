@@ -10,6 +10,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <b>v0.4.0</b><br/>
+        <ul>
+            <li>Compatible with IntelliJ 2019.3.*</li>
+            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.22 to be installed</li>
+        </ul>
         <b>v0.3.1</b><br/>
         <ul>
             <li>Compatible with IntelliJ 2019.3.*</li>
@@ -40,9 +45,9 @@
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="192" until-build="193.*"/>
+    <idea-version since-build="193" until-build="193.*"/>
 
-    <!-- depending on modules.lang enables the plugin to work in all products -->
+    <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
 
     <!-- Both AppCode and CLion use cidr.lang -->
