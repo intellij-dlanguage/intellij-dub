@@ -12,8 +12,8 @@
     <change-notes><![CDATA[
         <b>v0.4.0</b><br/>
         <ul>
-            <li>Compatible with IntelliJ 2019.3.*</li>
-            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.22 to be installed</li>
+            <li>Compatible with IntelliJ 2019.3.* - 2020.1.*</li>
+            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.24 to be installed</li>
         </ul>
         <b>v0.3.1</b><br/>
         <ul>
@@ -45,7 +45,7 @@
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="193" until-build="193.*"/>
+    <idea-version since-build="193" until-build="201.*"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
@@ -83,7 +83,7 @@
 
         <action id="dub.settings.action" class="io.github.intellij.dub.actions.ConfigureDToolsAction"
                 text="_Configure D Tools"
-                icon="AllIcons.General.ProjectSettings">
+                icon="AllIcons.General.GearPlain">
         </action>
     </actions>
 
