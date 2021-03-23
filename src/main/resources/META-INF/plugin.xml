@@ -10,16 +10,16 @@
     ]]></description>
 
     <change-notes><![CDATA[
-        <b>v0.4.0</b><br/>
+        <b>v0.5.0</b><br/>
         <ul>
-            <li>Compatible with IntelliJ 2019.3.* - 2020.1.*</li>
-            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.24 to be installed</li>
+            <li>Compatible with IntelliJ 2020.2.*</li>
+            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.25.1 to be installed</li>
         </ul>
     ]]>
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="193" until-build="201.*"/>
+    <idea-version since-build="202" until-build="202.*"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>

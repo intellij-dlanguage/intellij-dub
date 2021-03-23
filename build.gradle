@@ -10,8 +10,8 @@ buildscript {
 }
 
 plugins {
-    id 'org.jetbrains.intellij' version '0.4.15'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.60'
+    id 'org.jetbrains.intellij' version '0.4.26'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.72'
 }
 
 
@@ -93,7 +93,7 @@ allprojects {
         pluginName 'intellij-dub'
         version ideaVersion
         updateSinceUntilBuild false
-        plugins 'net.masterthought.dlanguage:1.24.1' //, 'terminal' // can specify built in Intellij plugins that our plugin relies on such as 'copyright', 'coverage', or 'yaml'
+        plugins 'net.masterthought.dlanguage:1.25.1' //, 'terminal' // can specify built in Intellij plugins that our plugin relies on such as 'copyright', 'coverage', or 'yaml'
 
 //        runIde {
 //            jbrVersion null
