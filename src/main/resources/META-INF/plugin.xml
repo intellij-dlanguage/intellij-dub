@@ -15,32 +15,6 @@
             <li>Compatible with IntelliJ 2019.3.* - 2020.1.*</li>
             <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.24 to be installed</li>
         </ul>
-        <b>v0.3.1</b><br/>
-        <ul>
-            <li>Compatible with IntelliJ 2019.3.*</li>
-            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.22 to be installed</li>
-        </ul>
-        <b>v0.3.0</b><br/>
-        <ul>
-            <li>Compatible with IntelliJ 2019.2.*</li>
-            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.20 to be installed</li>
-        </ul>
-        <b>v0.2.0</b><br/>
-        <ul>
-            <li>Compatible with IntelliJ 2019.1.*</li>
-            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.19 to be installed</li>
-        </ul>
-        <b>v0.1.2</b><br/>
-        <ul>
-            <li>Compatible with IntelliJ 2018.3 - 2019.1</li>
-            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.18 to be installed</li>
-        </ul>
-        <b>v0.1.1</b><br/>
-        <ul>
-            <li>Dub Tool Window</li>
-            <li>Compatible with IntelliJ 2017.3 - 2018.1</li>
-            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.16.* to be installed</li>
-        </ul>
     ]]>
     </change-notes>
 

@@ -12,7 +12,9 @@ Support for [DUB](https://code.dlang.org/) within IntelliJ IDEA. Requires [Intel
 
 | Plugin Version | IntelliJ Versions | release notes |
 | :--- | :--- | :--- |
-| 0.4.0 | 2019.3.* - 2020.1.* | maintenance release |
+| 0.6.0 | 2020.3.* - 2021.1.* | support for IntelliJ 2020.3 |
+| 0.5.0 | 2020.2.* | support for IntelliJ 2020.2 |
+| 0.4.0 | 2019.3.* - 2020.1.* | support for IntelliJ 2020.1 |
 | 0.3.1 | 2019.2.* - 2019.3.* | updated for IntelliJ 2019.3.* |
 | 0.3.0 | 2019.2.* | updated for IntelliJ 2019.2 |
 | 0.2.0 | 2019.1.* | updated for IntelliJ 2019.1 |
