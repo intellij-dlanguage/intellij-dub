@@ -1,8 +1,10 @@
 language: java
 
-jdk: oraclejdk8
+# IDEA 2020.3 uses JDK 11. Use Ubuntu Bionic for OpenJDK 11
 
-dist: trusty
+jdk: openjdk11
+
+dist: bionic
 
 before_cache:
  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -20,11 +22,13 @@ jobs:
   include:
     - stage: Build and Test
 #      env: ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
-      env: ORG_GRADLE_PROJECT_ideaVersion=2020.2
+      env: ORG_GRADLE_PROJECT_ideaVersion=211-EAP-SNAPSHOT
+    - env: ORG_GRADLE_PROJECT_ideaVersion=2020.3.3
+    - env: ORG_GRADLE_PROJECT_ideaVersion=2020.3
     - stage: Deploy new Release
       if: branch = master
       script: skip
-      env: ORG_GRADLE_PROJECT_ideaVersion=2020.2
+      env: ORG_GRADLE_PROJECT_ideaVersion=2020.3
       deploy:
         provider: script
         skip_cleanup: true
@@ -32,4 +36,4 @@ jobs:
         on:
           branch: master
   allow_failures:
-    - env: ORG_GRADLE_PROJECT_ideaVersion=LATEST-EAP-SNAPSHOT
+    - env: ORG_GRADLE_PROJECT_ideaVersion=211-EAP-SNAPSHOT
