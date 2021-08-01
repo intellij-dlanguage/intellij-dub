@@ -10,7 +10,7 @@ buildscript {
 }
 
 plugins {
-    id 'org.jetbrains.intellij' version '0.7.2'
+    id 'org.jetbrains.intellij' version '1.1.4'
     id 'org.jetbrains.kotlin.jvm' version '1.3.72'
 }
 
@@ -90,18 +90,21 @@ allprojects {
 
     apply plugin: 'org.jetbrains.intellij'
     intellij {
-        pluginName 'intellij-dub'
-        version ideaVersion
-        updateSinceUntilBuild false
-        plugins 'net.masterthought.dlanguage:1.26' //, 'terminal' // can specify built in Intellij plugins that our plugin relies on such as 'copyright', 'coverage', or 'yaml'
+        pluginName = 'intellij-dub'
+        version = ideaVersion
+        updateSinceUntilBuild = false
+        plugins = ['net.masterthought.dlanguage:1.26.1'] //, 'terminal' // can specify built in Intellij plugins that our plugin relies on such as 'copyright', 'coverage', or 'yaml'
 
-//        runIde {
-//            jbrVersion null
-//        }
+        runIde {
+            jvmArgs = ['--add-exports', 'java.base/jdk.internal.vm=ALL-UNNAMED']
+            // jbrVersion = null
+        }
 
         publishPlugin {
-            token System.getenv('JETBRAINS_TOKEN')
-            channels publishChannels
+            token = provider {
+                System.getenv('JETBRAINS_TOKEN')
+            }
+            channels = [publishChannels]
         }
     }
 
