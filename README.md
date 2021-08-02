@@ -5,14 +5,14 @@ Support for [DUB](https://code.dlang.org/) within IntelliJ IDEA. Requires [Intel
 
 | Branch | Status |
 | :--- | :--- |
-| Master | [![Build Status](https://travis-ci.org/intellij-dlanguage/intellij-dub.svg?branch=master)](https://travis-ci.org/intellij-dlanguage/intellij-dub) |
-| Develop | [![Build Status](https://travis-ci.org/intellij-dlanguage/intellij-dub.svg?branch=develop)](https://travis-ci.org/intellij-dlanguage/intellij-dub) |
+| Master | [![Build & Verify](https://github.com/intellij-dlanguage/intellij-dub/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/intellij-dlanguage/intellij-dub/actions/workflows/gradle.yml) |
+| Develop | [![Build & Verify](https://github.com/intellij-dlanguage/intellij-dub/actions/workflows/gradle.yml/badge.svg?branch=develop)](https://github.com/intellij-dlanguage/intellij-dub/actions/workflows/gradle.yml) |
 
 ## Supported versions of IntelliJ
 
 | Plugin Version | IntelliJ Versions | release notes |
 | :--- | :--- | :--- |
-| 0.6.0 | 2020.3.* - 2021.1.* | support for IntelliJ 2020.3 |
+| 0.6.1 | 2020.3.* - 2021.2.* | support for IntelliJ _2020.3.*_ - _2021.2.*_ |
 | 0.5.0 | 2020.2.* | support for IntelliJ 2020.2 |
 | 0.4.0 | 2019.3.* - 2020.1.* | support for IntelliJ 2020.1 |
 | 0.3.1 | 2019.2.* - 2019.3.* | updated for IntelliJ 2019.3.* |

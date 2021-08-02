@@ -10,10 +10,10 @@
     ]]></description>
 
     <change-notes><![CDATA[
-        <b>v0.6.0</b><br/>
+        <b>v0.6.1</b><br/>
         <ul>
-            <li>Compatible with IntelliJ 2020.3.* - 2021.1.*</li>
-            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.26 to be installed</li>
+            <li>Compatible with IntelliJ 2020.3.* - 2021.2.*</li>
+            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.26.1 to be installed</li>
         </ul>
     ]]>
     </change-notes>
