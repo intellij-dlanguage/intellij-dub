@@ -39,8 +39,7 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Tool Windows are the bits generally displayed on right hand side of Intellij (eg: Ant,Maven,Gradle)-->
         <toolWindow id="DUB" anchor="right" icon="/icons/dub-ball.png"
-                    factoryClass="io.github.intellij.dub.toolwindow.DubToolWindow"
-                    conditionClass="io.github.intellij.dub.toolwindow.DubToolWindowCondition"/>
+                    factoryClass="io.github.intellij.dub.toolwindow.DubToolWindow" />
 
         <!--<externalSystemManager id="DubManager" implementation="net.masterthought.dlanguage.dub.DubManager"/>-->
         <!--<externalSystemConfigLocator implementation="io.github.intellij.dub.ConfigLocator"/>-->

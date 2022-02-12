@@ -1,12 +1,13 @@
 package io.github.intellij.dub.toolwindow
 
 import com.intellij.openapi.diagnostic.Logger
-import com.intellij.openapi.externalSystem.model.ProjectSystemId
-import com.intellij.openapi.externalSystem.service.task.ui.AbstractExternalSystemToolWindowFactory
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.project.guessProjectDir
 import com.intellij.openapi.util.Disposer
+import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
+import java.util.*
 
 
 /**
@@ -23,14 +24,13 @@ import com.intellij.openapi.wm.ToolWindowFactory
  */
 class DubToolWindow : ToolWindowFactory {
 
-    private val LOG: Logger = Logger.getInstance(DubToolWindow::class.java)
+    private val log: Logger = Logger.getInstance(DubToolWindow::class.java)
 
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
-        LOG.debug("Creating DUB Tool Window: ${toolWindow.title}")
+        log.debug("Creating DUB Tool Window: ${toolWindow.title}")
 
         //val modules = io.github.intellij.dlanguage.module.DlangModuleType.findModules(project)
-
-        LOG.info("we have modules")
+        //log.info("we have modules")
 
         val dtw = DubToolWindowPanel(project, toolWindow)
         val content = toolWindow.contentManager.factory.createContent(dtw, null, false)
@@ -38,4 +38,14 @@ class DubToolWindow : ToolWindowFactory {
         Disposer.register(project, dtw)
     }
 
+    /*
+    * This method replaces the old tool window condition class that was used
+    */
+    override fun isApplicable(project: Project): Boolean {
+        log.debug("DUB Tool Window Condition: value(${project.name})")
+
+        return Arrays.stream<VirtualFile>(project.guessProjectDir()?.children)
+            .filter { f -> !f.isDirectory }
+            .anyMatch { f -> "dub.json".equals(f.name, ignoreCase = true) || "dub.sdl".equals(f.name, ignoreCase = true) }
+    }
 }
