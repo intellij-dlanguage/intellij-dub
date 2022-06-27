@@ -10,6 +10,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <b>v0.8.0</b><br/>
+        <ul>
+            <li>Compatible with IntelliJ 2021.3.* - 2022.1.*</li>
+            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.28.0 to be installed</li>
+        </ul>
         <b>v0.7.0</b><br/>
         <ul>
             <li>Compatible with IntelliJ 2021.2.* - 2022.1.*</li>
@@ -24,7 +29,7 @@
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="212" until-build="221.*"/>
+    <idea-version since-build="213" until-build="221.*"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>
@@ -38,7 +43,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Tool Windows are the bits generally displayed on right hand side of Intellij (eg: Ant,Maven,Gradle)-->
-        <toolWindow id="DUB" anchor="right" icon="/icons/dub-ball.png"
+        <toolWindow id="DubToolBar" anchor="right" icon="/icons/dub-ball.png"
                     factoryClass="io.github.intellij.dub.toolwindow.DubToolWindow" />
 
         <!--<externalSystemManager id="DubManager" implementation="net.masterthought.dlanguage.dub.DubManager"/>-->

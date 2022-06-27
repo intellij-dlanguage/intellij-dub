@@ -11,16 +11,17 @@ Support for [DUB](https://code.dlang.org/) within IntelliJ IDEA. Requires [Intel
 ## Supported versions of IntelliJ
 
 | Plugin Version | IntelliJ Versions | release notes                                              |
-| :--- | :--- |:-----------------------------------------------------------|
-| 0.7.0 | 2021.2.* - 2022.1.* | support for IntelliJ _2021.2.*_ - _2022.1.*_               |
-| 0.6.1 | 2020.3.* - 2021.2.* | support for IntelliJ _2020.3.*_ - _2021.2.*_               |
-| 0.5.0 | 2020.2.* | support for IntelliJ 2020.2                                |
-| 0.4.0 | 2019.3.* - 2020.1.* | support for IntelliJ 2020.1                                |
-| 0.3.1 | 2019.2.* - 2019.3.* | updated for IntelliJ 2019.3.*                              |
-| 0.3.0 | 2019.2.* | updated for IntelliJ 2019.2                                |
-| 0.2.0 | 2019.1.* | updated for IntelliJ 2019.1                                |
-| 0.1.2 | 2018.3.* - 2019.1.* | minor tweaks for IntelliJ 2018.3                           |
-| 0.1.1 | 2017.3.* - 2018.1.* | Initial release. Supports IntelliJ _2017.3.*_ - _2018.1.*_ |
+|:---------------| :--- |:-----------------------------------------------------------|
+| 0.8.0          | 2021.3.* - 2022.1.* | support for IntelliJ _2021.3.*_ - _2022.1.*_               |
+| 0.7.0          | 2021.2.* - 2022.1.* | support for IntelliJ _2021.2.*_ - _2022.1.*_               |
+| 0.6.1          | 2020.3.* - 2021.2.* | support for IntelliJ _2020.3.*_ - _2021.2.*_               |
+| 0.5.0          | 2020.2.* | support for IntelliJ 2020.2                                |
+| 0.4.0          | 2019.3.* - 2020.1.* | support for IntelliJ 2020.1                                |
+| 0.3.1          | 2019.2.* - 2019.3.* | updated for IntelliJ 2019.3.*                              |
+| 0.3.0          | 2019.2.* | updated for IntelliJ 2019.2                                |
+| 0.2.0          | 2019.1.* | updated for IntelliJ 2019.1                                |
+| 0.1.2          | 2018.3.* - 2019.1.* | minor tweaks for IntelliJ 2018.3                           |
+| 0.1.1          | 2017.3.* - 2018.1.* | Initial release. Supports IntelliJ _2017.3.*_ - _2018.1.*_ |
 
 ## Installation
 
