@@ -5,21 +5,24 @@ name: Publish plugin to the Jetbrains Marketplace
 ##
 
 on:
-    release:
-        types: [created]
+  release:
+    types: [ created ]
 
 jobs:
-    publish:
-        runs-on: ubuntu-latest
+  publish:
+    runs-on: ubuntu-latest
 
-        steps:
-            - uses: actions/checkout@v2
-            - name: Set up Java
-              uses: actions/setup-java@v1
-              with:
-                  java-version: 11
+    steps:
+    - uses: actions/checkout@v3
 
-            - name: Publish Plugin
-              run: ./gradlew publishPlugin
-              env:
-                  JETBRAINS_TOKEN: ${{ secrets.JETBRAINS_TOKEN }}
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: 11
+        distribution: zulu
+        cache: gradle
+
+    - name: Publish Plugin
+      run: ./gradlew publishPlugin
+      env:
+        JETBRAINS_TOKEN: ${{ secrets.JETBRAINS_TOKEN }}

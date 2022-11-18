@@ -10,6 +10,11 @@
     ]]></description>
 
     <change-notes><![CDATA[
+        <b>v0.9.0</b><br/>
+        <ul>
+            <li>Compatible with IntelliJ 20221.1 - 2022.2.*</li>
+            <li>Requires <a href="https://github.com/intellij-dlanguage/intellij-dlanguage/">D Language</a> v1.28.5 to be installed</li>
+        </ul>
         <b>v0.8.0</b><br/>
         <ul>
             <li>Compatible with IntelliJ 2021.3.* - 2022.1.*</li>
@@ -29,7 +34,7 @@
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="213" until-build="221.*"/>
+    <idea-version since-build="221" until-build="222.*"/>
 
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.lang</depends>

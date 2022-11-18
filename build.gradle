@@ -88,7 +88,7 @@ allprojects {
         pluginName = 'intellij-dub'
         version = ideaVersion
         updateSinceUntilBuild = false
-        plugins = [ 'net.masterthought.dlanguage:1.28.1' ] //, 'terminal' // can specify built in Intellij plugins that our plugin relies on such as 'copyright', 'coverage', or 'yaml'
+        plugins = [ 'net.masterthought.dlanguage:1.28.5' ] //, 'terminal' // can specify built in Intellij plugins that our plugin relies on such as 'copyright', 'coverage', or 'yaml'
 
         runIde {
             jvmArgs = ['--add-exports', 'java.base/jdk.internal.vm=ALL-UNNAMED']
